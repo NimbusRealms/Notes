@@ -1,5 +1,6 @@
 package com.sainttx.notes;
 
+import com.evankunmc.notes.Logger;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class PlayerListener implements Listener {
         }
 
         Player player = event.getPlayer();
-        ItemStack item = event.getPlayer().getItemInHand();
+        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
 
         // Verify that this is a real banknote
         if (item == null || !plugin.isBanknote(item)) {
@@ -78,5 +79,8 @@ public class PlayerListener implements Listener {
         } else {
             item.setAmount(item.getAmount() - 1);
         }
+
+        Logger log = new Logger();
+        log.addLog(event.getPlayer(), plugin.formatDouble(amount), Logger.ACTION_DEPOSIT);
     }
 }

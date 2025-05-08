@@ -1,5 +1,6 @@
 package com.sainttx.notes.command;
 
+import com.evankunmc.notes.Logger;
 import com.sainttx.notes.NotesPlugin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -42,6 +43,9 @@ public class DepositCommand implements CommandExecutor {
                     plugin.getEconomy().depositPlayer(player, amount);
                     player.sendMessage(plugin.getMessage("messages.note-redeemed")
                             .replace("[money]", plugin.formatDouble(amount)));
+
+                    Logger log = new Logger();
+                    log.addLog(player, plugin.formatDouble(amount), Logger.ACTION_DEPOSIT);
                 } else {
                     player.sendMessage(plugin.getMessage("messages.invalid-note"));
                 }

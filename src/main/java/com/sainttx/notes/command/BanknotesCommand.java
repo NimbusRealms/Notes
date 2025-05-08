@@ -1,5 +1,6 @@
 package com.sainttx.notes.command;
 
+import com.evankunmc.notes.Logger;
 import com.sainttx.notes.NotesPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -72,6 +73,9 @@ public class BanknotesCommand implements CommandExecutor {
                     sender.sendMessage(plugin.getMessage("messages.note-given")
                             .replace("[money]", plugin.formatDouble(amount))
                             .replace("[player]", target.getName()));
+
+                    Logger log = new Logger();
+                    log.addLog(senderName, target.getName(), plugin.formatDouble(amount));
                 }
             }
             return true;

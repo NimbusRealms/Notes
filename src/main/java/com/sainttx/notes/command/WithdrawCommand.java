@@ -1,5 +1,6 @@
 package com.sainttx.notes.command;
 
+import com.evankunmc.notes.Logger;
 import com.sainttx.notes.NotesPlugin;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.ChatColor;
@@ -75,6 +76,9 @@ public class WithdrawCommand implements CommandExecutor {
 
                 player.getInventory().addItem(banknote);
                 player.sendMessage(plugin.getMessage("messages.note-created").replace("[money]", plugin.formatDouble(amount)));
+
+                Logger log = new Logger();
+                log.addLog(player, plugin.formatDouble(amount), Logger.ACTION_WITHDRAW);
             }
         }
 
